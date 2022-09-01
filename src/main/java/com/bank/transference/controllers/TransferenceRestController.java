@@ -121,9 +121,8 @@ public class TransferenceRestController {
         log.info(String.format("id -> %s", id.toString()));
 
         if(Boolean.TRUE.equals(boolStatus)){
-            transferenceService.updateStatus(id, TransferenceStatus.IN_PROCESS);
 
-            transferenceService.find(id).subscribe(transfer -> {
+            transferenceService.updateStatus(id, TransferenceStatus.IN_PROCESS).subscribe(transfer -> {
                 log.info(transfer.toString());
                 var requestYanki = RequestYanki.builder()
                         .phoneNumberSender(transfer.getIdSender().getPhone())
@@ -138,7 +137,7 @@ public class TransferenceRestController {
             });
         }
         else{
-            transferenceService.updateStatus(id, TransferenceStatus.REFUSED);
+            transferenceService.updateStatus(id, TransferenceStatus.REFUSED).subscribe();
         }
         log.info("[END] sendCheckBootcoins");
     }
@@ -154,9 +153,8 @@ public class TransferenceRestController {
         log.info(String.format("id -> %s", id.toString()));
 
         if(Boolean.TRUE.equals(boolStatus)){
-            transferenceService.updateStatus(id, TransferenceStatus.IN_VALIDATION);
 
-            transferenceService.find(id).subscribe(transfer -> {
+            transferenceService.updateStatus(id, TransferenceStatus.IN_VALIDATION).subscribe(transfer -> {
                 log.info(transfer.toString());
                 var requestWallet = RequestWallet.builder()
                         .idSender(transfer.getIdSender().getIdClient())
@@ -171,7 +169,7 @@ public class TransferenceRestController {
             });
         }
         else{
-            transferenceService.updateStatus(id, TransferenceStatus.REFUSED);
+            transferenceService.updateStatus(id, TransferenceStatus.REFUSED).subscribe();
         }
         log.info("[END] sendCheckMont");
     }
@@ -187,9 +185,8 @@ public class TransferenceRestController {
         log.info(String.format("id -> %s", id.toString()));
 
         if(Boolean.TRUE.equals(boolStatus)){
-            transferenceService.updateStatus(id, TransferenceStatus.IN_PAYMENT_PROCESS);
 
-            transferenceService.find(id).subscribe(transfer -> {
+            transferenceService.updateStatus(id, TransferenceStatus.IN_PAYMENT_PROCESS).subscribe(transfer -> {
                 log.info(transfer.toString());
                 var requestYanki = RequestYanki.builder()
                         .phoneNumberSender(transfer.getIdSender().getPhone())
@@ -204,7 +201,7 @@ public class TransferenceRestController {
             });
         }
         else{
-            transferenceService.updateStatus(id, TransferenceStatus.REFUSED);
+            transferenceService.updateStatus(id, TransferenceStatus.REFUSED).subscribe();
         }
         log.info("[END] sendUpdateBootcoins");
     }
@@ -220,10 +217,10 @@ public class TransferenceRestController {
         log.info(String.format("id -> %s", id.toString()));
 
         if(Boolean.TRUE.equals(boolStatus)){
-            transferenceService.updateStatus(id, TransferenceStatus.ACCEPTED);
+            transferenceService.updateStatus(id, TransferenceStatus.ACCEPTED).subscribe();
         }
         else{
-            transferenceService.updateStatus(id, TransferenceStatus.REFUSED);
+            transferenceService.updateStatus(id, TransferenceStatus.REFUSED).subscribe();
         }
         log.info("[END] sendUpdateMonts");
     }
